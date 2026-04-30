@@ -1,0 +1,14 @@
+# VSCode
+.vscode/
+
+# Codex local file
+.codex
+
+# executables / build output
+*.exe
+*.out
+a.out
+*.app
+*.bin
+*.o
+*.obj
