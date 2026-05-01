@@ -4,7 +4,13 @@
 # Codex local file
 .codex
 
-# executables / build output
+# build directories
+build/
+cmake-build-*/
+out/
+dist/
+
+# C/C++ compiled binaries and objects
 *.exe
 *.out
 a.out
@@ -12,3 +18,15 @@ a.out
 *.bin
 *.o
 *.obj
+*.lo
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.pdb
+*.dSYM/
+
+# known extensionless local binaries
+Easy/1-twosum/solution
+Starter/helloWorld/helloWorld
