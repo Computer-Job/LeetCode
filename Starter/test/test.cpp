@@ -1,9 +1,14 @@
 #include <iostream>
 #include <vector>
+#include <cassert>
+
+int returnFive () {
+    return 5;
+}
 
 #ifndef NDEBUG
 void debugTest() {
-    std::cout << "response" << "\n";
+    assert(returnFive() == 5);
 }
 #endif
 
@@ -34,6 +39,17 @@ int main () {
     for (std::size_t i = 0; i < values.size(); i ++) {
         std::cout << values[i] << "\n";
     }
+
+    int five {returnFive()};
+
+    std::cout << "The value of the int 'five' is: " << five << "\n";
+    std::cout << "The byte size of the int 'five' is: " << sizeof(five) << "\n";
+
+    int input {};
+    
+    std::cout << "\n\nPlease type an integer: " << std::flush;
+    std::cin >> input;
+    std::cout << "Thank you, your input is: " << input << "\n";
 
     #ifndef NDEBUG
         debugTest();
