@@ -33,3 +33,6 @@ Starter/helloWorld/helloWorld
 
 # local C++ build outputs
 **/app
+
+# untrack local build artifact
+Starter/bankAccount/app_from_header
