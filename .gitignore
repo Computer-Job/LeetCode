@@ -30,3 +30,7 @@ a.out
 # known extensionless local binaries
 Easy/1-twosum/solution
 Starter/helloWorld/helloWorld
+
+# local C++ build outputs
+**/app
+**/inheritance_app
