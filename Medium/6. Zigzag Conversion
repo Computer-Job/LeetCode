@@ -1,0 +1,76 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        vector<vector<char>> map {};
+        size_t zig = 0;
+
+        // for (size_t i = 0; i < s.size() * 4; i++)
+        // {
+        //     std::cout << i << std::endl;
+        //     map.push_back({});
+        // }
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            if (i < numRows)
+            {
+                map.push_back({});
+                map[zig % numRows].push_back(s[i]);
+                zig ++;
+            }
+            else
+            {
+                if (zig % numRows == 0 && zig != 0 && numRows > 1)
+                {
+                    zig -= 2;
+
+                    for (i; i < s.size(); i++)
+                    {
+                        for (size_t e = 0; e < numRows; e++)
+                        {
+                            if (e == zig)
+                            {
+                                map[e % numRows].push_back(s[i]);
+                            }
+                            else 
+                            {
+                                map[e % numRows].push_back(' ');
+                            }
+
+                            if (zig == 0)
+                                break;
+                        }
+                        
+                        if (zig == 0)
+                            break;
+
+                        zig --;
+                    }
+                    zig ++;
+                }
+                else
+                {
+                    map[zig % numRows].push_back(s[i]);
+                    zig ++;
+                }   
+            }
+        }
+
+        string output {};
+
+        for (size_t i = 0; i < map.size(); i++)
+        {
+            for (size_t e = 0; e < map[i].size(); e++)
+            {
+                char element = map[i][e];
+                //std::cout << element;
+
+                if (element != ' ')
+                    output += map[i][e];
+            }
+            std::cout << std::endl;
+        }
+        std::cout << output;
+
+        return output;
+    }
+};

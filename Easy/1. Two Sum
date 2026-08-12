@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> output;
+        unordered_map<int, int> hashmap;
+
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            auto check = hashmap.find(target - nums[i]);
+
+            if (check != hashmap.end())
+            {
+                output.push_back(i);
+                output.push_back(check->second);
+
+                break;
+            }
+            hashmap.emplace(nums[i], i);
+        }
+        return output;
+    }
+};

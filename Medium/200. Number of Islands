@@ -1,0 +1,68 @@
+class Solution {
+public:
+    void islandCrawler(vector<vector<char>>& grid, size_t i, size_t e)
+    {
+        bool left = e - 1 <= 300 ? grid[i][e - 1] == '1' ? true : false : false;
+
+        if (left == true)
+        {
+            grid[i][e - 1] = 'X';
+            islandCrawler(grid, i, e - 1);
+        }
+        
+        bool right = e + 1 < grid[i].size() ? grid[i][e + 1] == '1' ? true : false : false;
+        
+        if (right == true)
+        {
+            grid[i][e + 1] = 'X';
+            islandCrawler(grid, i, e + 1);
+        }
+        
+        bool top = i - 1 <= 300 ? grid[i - 1][e] == '1' ? true : false : false;
+
+        if (top == true)
+        {
+            grid[i - 1][e] = 'X';
+            islandCrawler(grid, i - 1, e);
+        }
+        
+        bool down = i + 1 < grid.size() ? grid[i + 1][e] == '1' ? true : false : false;
+
+        if (down == true)
+        {
+            grid[i + 1][e] = 'X';
+            islandCrawler(grid, i + 1, e);
+        }
+
+        return;
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+        int island_count = 0;
+
+        for (size_t i = 0; i < grid.size(); i++)
+        {
+            for (size_t e = 0; e < grid[i].size(); e++)
+            {
+                if (grid[i][e] == '1')
+                {
+                    grid[i][e] = 'X';
+
+                    islandCrawler(grid, i, e);
+                    island_count++;
+
+                    // for (size_t i = 0; i < grid.size(); i++)
+                    // {
+                    //     for (size_t e = 0; e < grid[i].size(); e++)
+                    //     {
+                    //         std::cout << grid[i][e] << ", ";
+                    //     }
+                    //     std::cout << std::endl;
+                    // }
+                    // std::cout << std::endl;
+                }
+            }
+        }
+        return island_count;
+    }
+};

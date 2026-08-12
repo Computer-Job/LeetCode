@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int smallestNumber(int n, int t) {
+        int output = n;
+
+        while (true)
+        {
+            int digits = output;
+            int digit = 1;
+
+            while (digits > 0)
+            {
+                digit *= digits % 10;
+                digits /= 10;
+            }
+
+            if (digit % t != 0)
+            {
+                output++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return output;
+    }
+};

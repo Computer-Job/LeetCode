@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int missingInteger(vector<int>& nums) {
+        unordered_set<int> list {};
+        int final_sum {0};
+        int sum {0};
+        int check_value {0};
+        int pre_value {0};
+
+        for (size_t i = 0; i < nums.size(); i++)
+        {
+            check_value = nums[i];
+
+            if (pre_value == check_value - 1 || i == 0)
+            {
+                sum += check_value;
+                final_sum = max(sum, final_sum);
+            }
+            else
+            {
+                for (i; i < nums.size(); i++)
+                {
+                    list.insert(nums[i]);
+                }
+                break;
+            }
+
+            list.insert(check_value);
+
+            pre_value = check_value;
+        }
+
+        while (list.find(final_sum) != list.end())
+        {
+            final_sum++;
+        }
+
+        return final_sum;
+    }
+};

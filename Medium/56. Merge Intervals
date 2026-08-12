@@ -1,0 +1,70 @@
+class Solution {
+
+void quickSort(vector<vector<int>>& array, int start, int end)
+{
+    if (end <= start)
+        return;
+
+    size_t pivot = partition(array, start, end);
+    quickSort(array, start, pivot - 1);
+    quickSort(array, pivot + 1, end);
+}
+
+size_t partition(vector<vector<int>>& array, int start, int end)
+{
+    int pivot = array[end][0];
+    size_t i = start - 1;
+
+    for (size_t j = start; j <= end - 1; j++)
+    {
+        if (array[j][0] < pivot)
+        {
+            i++;
+            vector<int> temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    i++;
+
+    if (array[i][1] > array[end][1] || array[i][0] > array[end][0])
+    {
+        vector<int> temp = array[i];
+        array[i] = array[end];
+        array[end] = temp;
+    }
+
+    return i;
+}
+
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> output;
+        quickSort(intervals, 0, intervals.size() - 1);
+        
+        size_t j = 1;
+        size_t i = 0;
+        output.push_back({});
+        output[output.size() - 1].push_back(intervals[i][0]);
+        output[output.size() - 1].push_back(intervals[i][1]);
+
+        for (j; j <= intervals.size() - 1; j ++)
+        { 
+            if (output[i][1] >= intervals[j][0])
+            {
+                if (output[i][1] < intervals[j][1])
+                    output[i][1] = intervals[j][1];
+            }
+            else
+            {
+                output.push_back({});
+                output[output.size() - 1].push_back(intervals[j][0]);
+                output[output.size() - 1].push_back(intervals[j][1]);
+
+                i++;
+            }
+        }
+
+        return output;
+    }
+};

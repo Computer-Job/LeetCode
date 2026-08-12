@@ -1,0 +1,46 @@
+class Solution {
+    string longestString(string &s, size_t& left, size_t& right) 
+    {
+        if (right + 1 >= s.size())
+        {
+            return s.substr(left, right - left + 1);
+        }
+
+        if (s[left] == s[right + 1])
+        {
+            right++;
+            longestString(s, left, right);
+        }
+
+        while (right + 1 < s.size() && left - 1 < 1000 && (s[left - 1] == s[right + 1]))
+        {
+            left--;
+            right++;
+        }
+        
+        return s.substr(left, right - left + 1);
+    }
+
+public:
+    string longestPalindrome(string s) {
+        string output {};
+        size_t left {0};
+        size_t right {0};
+
+        for (size_t i = 0; i < s.size(); i = i >= (right - left) / 2 ? i + 1 : i = (right - left) / 2)
+        {
+            left = i;
+            right = i;
+
+            string temp = longestString(s, left, right);
+            output = output.size() < temp.size() ? temp : output;
+
+            if (output.size() == s.size())
+                break;
+            
+            std::cout << temp << std::endl;
+        }
+
+        return output;
+    }
+};

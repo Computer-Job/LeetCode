@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int reverse(int x) {
+        vector<int> array {};
+        long output {0};
+        long count {1};
+
+        if ((x >= 0 && x < 10) || (x < 0 && x > -10))
+        {
+            return x;
+        }
+
+        while (x % 10 == 0)
+        {
+            x /= 10;
+        }
+
+        while (x != 0)
+        {
+            int result {x % 10};
+
+            std::cout << "Result: " << result << std::endl;
+
+            array.push_back(result);
+            count *= 10;
+
+            x = x / 10;
+        }
+        count /= 10;
+
+        for (size_t i = 0; i < array.size(); i++)
+        {
+            output += array[i] * count;
+
+            std::cout << array[i] << std::endl;
+            std::cout << output << std::endl;
+            count /= 10;
+        }
+
+        if (output > INT_MAX || output < INT_MIN)
+            return 0;
+
+        return output;
+    }
+};

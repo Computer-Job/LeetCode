@@ -1,0 +1,81 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        size_t size_1 = nums1.size();
+        size_t size_2 = nums2.size(); 
+        size_t index_1 = 0;
+        size_t index_2 = 0;
+        int element_1 = 0;
+        int element_2 = 0;
+        double median;
+
+        size_t even_odd = (size_1 + size_2) % 2 == 0 ? 0 : 1;
+
+        size_t iterations = (size_1 + size_2) / 2 + 1;
+
+        if (index_1 >= size_1)
+        {
+            index_1 = 1001;
+        }
+
+        if (index_2 >= size_2)
+        {
+            index_2 = 1001;
+        }
+
+
+        for (size_t i = 0; i < iterations; i++)
+        {
+            element_2 = element_1;
+
+            if (index_1 <= 1000 && index_2 <= 1000)
+            {
+                if (nums1[index_1] < nums2[index_2])
+                {
+                    element_1 = nums1[index_1];
+                    std::cout << element_1 << ", ";
+                    index_1++;
+                }
+                else 
+                {
+                    element_1 = nums2[index_2];
+                    std::cout << element_1 << ", ";
+                    index_2++;
+                }
+            }
+            else if (index_1 <= 1000)
+            {
+                element_1 = nums1[index_1];
+                std::cout << element_1 << ", ";
+                index_1++;
+            }
+            else if (index_2 <= 1000)
+            {
+                element_1 = nums2[index_2];
+                std::cout << element_1 << ", ";
+                index_2++;
+            }
+
+            if (index_1 >= size_1)
+            {
+                index_1 = 1001;
+            }
+
+            if (index_2 >= size_2)
+            {
+                index_2 = 1001;
+            }
+        }
+
+        if (even_odd == 0)
+        {
+            median = (element_1 + element_2) / 2.0;
+        }
+        else
+        {
+            median = element_1;
+        }
+
+        return median;
+    }
+};

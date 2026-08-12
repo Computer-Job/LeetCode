@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        unordered_map<char, int> s_map;
+        unordered_map<char, int> t_map;
+
+        if (s.size() != t.size())
+            return false;
+
+        for (size_t i = 0; i < s.size(); i++)
+        {
+            auto find = s_map.find(s[i]);
+
+            if (find == s_map.end())
+            {
+                s_map.emplace(s[i], 1);
+            }
+            else 
+            {
+                find->second++;
+            }
+        }
+
+        for (size_t i = 0; i < t.size(); i++)
+        {
+            auto s_find = s_map.find(t[i]);
+
+            if (s_find != s_map.end())
+            {
+                auto t_find = t_map.find(t[i]);
+
+                if (t_find == t_map.end())
+                {
+                    t_map.emplace(t[i], 1);
+                }
+                else 
+                {
+                    t_find->second++;
+
+                    if (t_find->second > s_find->second)
+                        return false;
+                }
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
