@@ -1,0 +1,24 @@
+class Solution {
+    public boolean checkDivisibility(int n) {
+        int product = 1;
+        int sum = 0;
+
+        int initial = n;
+
+        while (initial != 0)
+        {
+            //int value = initial % 10; //Affects Memory amount?!
+            product *= initial % 10;
+            sum += initial % 10;
+            initial /= 10;
+        }
+        
+        int result = sum + product;
+
+        if (n % result == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+}
