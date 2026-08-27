@@ -1,0 +1,96 @@
+class Solution {
+public:
+    bool lessLex(string temp, string output)
+    {
+        //long long power {2};
+        __int128 int_t {0};
+        __int128 int_o {0};
+
+        // int_t = std::stoi(temp, nullptr, 2);
+        // int_o = std::stoi(output, nullptr, 2);
+
+
+        if (temp.size() == 0 || output.size() == 0)
+            return false;
+
+        for (size_t i = 0; i < temp.size(); i ++)
+        {
+            int_t = (int_t * 2) + (temp[i] - '0');
+        }
+        // std::cout << ": " << temp << "\n";
+        // std::cout << ": " << int_t << "\n";
+
+        //power = 1;
+
+        for (size_t i = 0; i < output.size(); i ++)
+        {
+            int_o = (int_o * 2) + (output[i] - '0');
+        }
+        // std::cout << ": " << output << "\n";
+        // std::cout << ": " << int_o << "\n";
+
+        if (int_t < int_o)
+            return true;
+
+        return false;
+    }
+
+    string shortestBeautifulSubstring(string s, int k) {
+        string output {};
+        int count {0};
+        int right {0};
+        int left  {0};
+
+        for (left; left < s.size(); left++)
+        {
+            if (s[left] == '1')
+                break;
+        }
+        right = left;
+
+        for (right; right < s.size(); right++)
+        {
+            output += s[right];
+
+            if (s[right] == '1')
+                count++;
+
+            if (count == k)
+                break;
+        }
+
+        if (right == s.size() && count < k)
+        {
+            return "";
+        }
+
+        while (true)
+        {
+            right ++;
+
+            if (right >= s.size())
+                break;
+
+            if (s[right] == '1')
+            {
+                left ++;
+
+                for (left; left < s.size(); left++)
+                {
+                    if (s[left] == '1')
+                        break;
+                }
+            }
+            string temp = s.substr(left, right - left + 1);
+
+            if (lessLex(temp, output) == true)
+                output = temp;
+        }
+        std::cout << "Left: " << left << "\n";
+        std::cout << "Right: " << right << "\n";
+        std::cout << ": " << output << "\n";
+
+
+        return output;
+    }
+};
